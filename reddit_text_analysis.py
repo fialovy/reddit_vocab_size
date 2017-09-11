@@ -165,6 +165,8 @@ class RedditTextAnalyzer(object):
         return blob.sentiment.polarity
 
 
+analyzer = RedditTextAnalyzer()
+
 # let's do all teh files because yolololololo
 current_dir = os.path.dirname(os.path.realpath(__file__))
 for fname in filter(lambda fname: 'subreddits.txt' in fname, os.listdir(current_dir)):
@@ -173,7 +175,6 @@ for fname in filter(lambda fname: 'subreddits.txt' in fname, os.listdir(current_
 
     for sub_name in subs_list:
         sub_name = sub_name.strip()
-        analyzer = RedditTextAnalyzer()
         sub_data = analyzer.api.get_reddit_response(
             'http://www.reddit.com/r/%s.json' % sub_name,
             params={'sort': 'new', 'limit': analyzer.POST_LIMIT},
